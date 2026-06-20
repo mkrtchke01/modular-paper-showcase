@@ -3,10 +3,13 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Modular Paper Showcase — выразительный каталог бумажных модульных объектов и наборов.">
-    <meta name="theme-color" content="#f2efe8">
-    <title>Modular Paper Showcase — каталог модульных объектов</title>
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23244bd6'/%3E%3Crect x='10' y='10' width='25' height='25' rx='6' fill='%23dcff37' stroke='%23161616' stroke-width='3'/%3E%3Ccircle cx='43' cy='43' r='12' fill='%23fffdf7' stroke='%23161616' stroke-width='3'/%3E%3C/svg%3E">
+    <meta name="description" content="Бумагу, пожалуйста — студия упаковки подарков и бумажного творчества. Упаковочная бумага, бумажный декор и материалы для творчества.">
+    <meta name="theme-color" content="#000000">
+    <title>Бумагу, пожалуйста — студия упаковки подарков и бумажного творчества</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23000000'/%3E%3Ccircle cx='22' cy='24' r='11' fill='%234787C3'/%3E%3Ccircle cx='42' cy='24' r='11' fill='%23E0D848'/%3E%3Ccircle cx='32' cy='42' r='11' fill='%23CC3E8C'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/main.js" defer></script>
   </head>
@@ -14,9 +17,8 @@
     <a class="skip-link" href="#main-content">Перейти к содержанию</a>
 
     <header class="site-header" data-header>
-      <a class="brand" href="#top" aria-label="Modular Paper Showcase — на главную">
-        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
-        <span>Modular<br>Paper</span>
+      <a class="brand" href="#top" aria-label="Бумагу, пожалуйста — на главную">
+        <img src="assets/logo.png" alt="Бумагу, пожалуйста">
       </a>
 
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
@@ -25,189 +27,173 @@
       </button>
 
       <nav class="site-nav" id="site-nav" aria-label="Основная навигация">
+        <a href="#catalog">Каталог</a>
         <a href="#about">О нас</a>
-        <a href="#catalog">Товары</a>
         <a href="#contacts">Контакты</a>
       </nav>
     </header>
 
     <main id="main-content">
+      <!-- ===== Hero: логотип по центру, элементы конструктора вокруг (сбалансированно) ===== -->
       <section class="hero" id="top" aria-labelledby="hero-title">
-        <div class="hero-copy">
-          <p class="eyebrow">Каталог / 2026</p>
-          <h1 id="hero-title">Форма,<br><span>которую можно</span><br>собрать.</h1>
-          <p class="hero-intro">Модульные бумажные объекты для пространства, игры и творческих экспериментов.</p>
+        <!-- Элементы конструктора: «клумбы» лепестков по краям, ниже хедера.
+             Расстановка ЗЕРКАЛЬНАЯ: одинаковое число и размеры слева и справа
+             → края симметричны, ни один не тяжелее (требование заказчика). -->
+        <div class="hero-figures" aria-hidden="true">
+          <!-- Левый край -->
+          <img class="fig fig--l1" src="assets/fig-yellow.png" alt="">
+          <img class="fig fig--l2" src="assets/fig-magenta.png" alt="">
+          <img class="fig fig--l3" src="assets/fig-blue.png" alt="">
+          <img class="fig fig--l4" src="assets/fig-green.png" alt="">
+          <img class="fig fig--l5" src="assets/fig-yellow.png" alt="">
+          <img class="fig fig--l6" src="assets/fig-blue.png" alt="">
+          <img class="fig fig--l7" src="assets/fig-green.png" alt="">
+          <!-- Правый край (зеркало левого) -->
+          <img class="fig fig--r1" src="assets/fig-yellow.png" alt="">
+          <img class="fig fig--r2" src="assets/fig-magenta.png" alt="">
+          <img class="fig fig--r3" src="assets/fig-blue.png" alt="">
+          <img class="fig fig--r4" src="assets/fig-green.png" alt="">
+          <img class="fig fig--r5" src="assets/fig-yellow.png" alt="">
+          <img class="fig fig--r6" src="assets/fig-blue.png" alt="">
+          <img class="fig fig--r7" src="assets/fig-green.png" alt="">
+        </div>
+
+        <div class="hero-inner">
+          <h1 id="hero-title" class="sr-only">Бумагу, пожалуйста — студия упаковки подарков и бумажного творчества</h1>
+          <img class="hero-logo" src="assets/logo.png" alt="Бумагу, пожалуйста">
+          <p class="hero-subtitle">студия упаковки подарков<br>и бумажного творчества</p>
           <a class="button button-primary" href="#catalog">
-            Смотреть товары
+            Смотреть каталог
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M14 7l5 5-5 5"/></svg>
           </a>
         </div>
-
-        <div class="hero-stage" aria-label="Абстрактная композиция из модульных бумажных деталей" role="img">
-          <div class="stage-grid" aria-hidden="true"></div>
-          <div class="paper-module module-a" aria-hidden="true"><span></span><i></i><b></b></div>
-          <div class="paper-module module-b" aria-hidden="true"><span></span><i></i></div>
-          <div class="paper-module module-c" aria-hidden="true"><span></span><i></i><b></b></div>
-          <div class="connector connector-a" aria-hidden="true"></div>
-          <div class="connector connector-b" aria-hidden="true"></div>
-          <p class="stage-note">01 — соберите<br>свою композицию</p>
-        </div>
-
-        <p class="hero-side-note" aria-hidden="true">Paper objects · modular thinking</p>
       </section>
 
-      <section class="marquee" aria-label="Ключевые свойства">
-        <div>
-          <span>Собирайте</span><i></i>
-          <span>Комбинируйте</span><i></i>
-          <span>Меняйте</span><i></i>
-          <span aria-hidden="true">Собирайте</span><i aria-hidden="true"></i>
-          <span aria-hidden="true">Комбинируйте</span>
-        </div>
-      </section>
-
+      <!-- ===== О нас ===== -->
       <section class="about section-pad" id="about" aria-labelledby="about-title">
-        <div class="section-index reveal">
-          <span>01</span>
-          <p>О проекте</p>
-        </div>
-        <div class="about-main reveal">
-          <h2 id="about-title">Простые детали.<br>Много сценариев.</h2>
-          <p>Modular Paper Showcase объединяет объекты, которые можно собирать, перестраивать и адаптировать под разные задачи. Мы оставляем конструкции понятными, а пространство для идей — открытым.</p>
-        </div>
-        <div class="benefits">
-          <article class="benefit reveal">
-            <span>01 / 04</span>
-            <h3>Выбор</h3>
-            <p>Линейка форматов для разных пространств и задач.</p>
-          </article>
-          <article class="benefit reveal">
-            <span>02 / 04</span>
-            <h3>Материал</h3>
-            <p>Аккуратная работа с бумагой, цветом и конструкцией.</p>
-          </article>
-          <article class="benefit reveal">
-            <span>03 / 04</span>
-            <h3>Заказ</h3>
-            <p>Понятный путь от выбора объекта до оформления заявки.</p>
-          </article>
-          <article class="benefit reveal">
-            <span>04 / 04</span>
-            <h3>Надежность</h3>
-            <p>Продуманные соединения и проверенная геометрия деталей.</p>
-          </article>
+        <div class="about-grid">
+          <div class="about-text reveal">
+            <div class="section-index"><span>01</span><p>О нас</p></div>
+            <!-- TODO: заменить плейсхолдер на финальный текст от заказчика -->
+            <h2 id="about-title">Собираем<br><span>из бумаги</span><br>настроение.</h2>
+            <p>«Бумагу, пожалуйста» — студия упаковки подарков и бумажного
+              творчества. Мы превращаем обычный подарок в маленькое событие:
+              подбираем бумагу, ленты и декор так, чтобы каждый свёрток
+              хотелось разворачивать медленно и бережно.</p>
+            <p>В нашей мастерской живут модульные бумажные фигуры — облака,
+              клевер, солнце и листья. Из них, как из деталей конструктора,
+              мы собираем композиции для упаковки, витрин и праздничного декора.</p>
+            <ul class="about-list">
+              <li><span class="dot dot--blue"></span>Авторская упаковка подарков под любой повод</li>
+              <li><span class="dot dot--yellow"></span>Большой выбор упаковочной бумаги и материалов</li>
+              <li><span class="dot dot--magenta"></span>Бумажный декор и творческие наборы</li>
+              <li><span class="dot dot--green"></span>Индивидуальные композиции на заказ</li>
+            </ul>
+          </div>
+          <div class="about-visual reveal" role="img" aria-label="Композиция из бумажных модульных элементов">
+            <img src="assets/render/5.png" alt="" loading="lazy">
+          </div>
         </div>
       </section>
 
+      <!-- ===== Каталог / Товары ===== -->
       <section class="catalog section-pad" id="catalog" aria-labelledby="catalog-title">
         <div class="catalog-heading reveal">
-          <div class="section-index section-index-light">
-            <span>02</span>
-            <p>Товары</p>
-          </div>
-          <h2 id="catalog-title">Каталог<br><em>модулей</em></h2>
-          <p>Демонстрационное наполнение. Названия, описания, цены и изображения можно заменить после получения материалов.</p>
+          <div class="section-index"><span>02</span><p>Каталог</p></div>
+          <h2 id="catalog-title">Наши <em>материалы</em></h2>
+          <p>Пример наполнения. Названия, описания, цены и фотографии заменим
+            после получения материалов от заказчика.</p>
         </div>
 
+        <!-- TODO: заменить карточки на реальные товары (название, описание, фото, цена) -->
         <div class="catalog-grid">
-          <article class="product-card reveal">
-            <div class="product-visual visual-one" role="img" aria-label="Placeholder изображения товара 1">
-              <span class="piece piece-1"></span><span class="piece piece-2"></span><span class="piece piece-3"></span><i></i>
-              <small>Изображение<br>будет добавлено</small>
-            </div>
+          <article class="product-card reveal" style="--card:#4787C3">
+            <div class="product-visual"><img src="assets/render/cloud.png" alt="" loading="lazy"></div>
             <div class="product-meta">
-              <div><p>Товар 1</p><span>Описание будет добавлено</span></div>
-              <strong>Цена будет добавлена</strong>
+              <div><p>Крафт-бумага</p><span>Натуральный крафт, 90&nbsp;г/м² — универсальная упаковка для подарков и посылок.</span></div>
+              <strong>от 290&nbsp;₽</strong>
             </div>
           </article>
 
-          <article class="product-card reveal">
-            <div class="product-visual visual-two" role="img" aria-label="Placeholder изображения товара 2">
-              <span class="piece piece-1"></span><span class="piece piece-2"></span><span class="piece piece-3"></span><i></i>
-              <small>Изображение<br>будет добавлено</small>
-            </div>
+          <article class="product-card reveal" style="--card:#CC3E8C">
+            <div class="product-visual"><img src="assets/render/clover.png" alt="" loading="lazy"></div>
             <div class="product-meta">
-              <div><p>Товар 2</p><span>Описание будет добавлено</span></div>
-              <strong>Цена будет добавлена</strong>
+              <div><p>Цветная упаковочная</p><span>Яркие рулоны в 12 оттенках — для подарков и подарочной упаковки.</span></div>
+              <strong>от 350&nbsp;₽</strong>
             </div>
           </article>
 
-          <article class="product-card reveal">
-            <div class="product-visual visual-three" role="img" aria-label="Placeholder изображения товара 3">
-              <span class="piece piece-1"></span><span class="piece piece-2"></span><span class="piece piece-3"></span><i></i>
-              <small>Изображение<br>будет добавлено</small>
-            </div>
+          <article class="product-card reveal" style="--card:#E0D848">
+            <div class="product-visual"><img src="assets/render/sun.png" alt="" loading="lazy"></div>
             <div class="product-meta">
-              <div><p>Товар 3</p><span>Описание будет добавлено</span></div>
-              <strong>Цена будет добавлена</strong>
+              <div><p>Папиросная бумага</p><span>Нежная тонкая бумага для деликатной упаковки — 100&nbsp;листов.</span></div>
+              <strong>от 210&nbsp;₽</strong>
             </div>
           </article>
 
-          <article class="product-card reveal">
-            <div class="product-visual visual-four" role="img" aria-label="Placeholder изображения товара 4">
-              <span class="piece piece-1"></span><span class="piece piece-2"></span><span class="piece piece-3"></span><i></i>
-              <small>Изображение<br>будет добавлено</small>
-            </div>
+          <article class="product-card reveal" style="--card:#AFCE3E">
+            <div class="product-visual"><img src="assets/render/tree.png" alt="" loading="lazy"></div>
             <div class="product-meta">
-              <div><p>Товар 4</p><span>Описание будет добавлено</span></div>
-              <strong>Цена будет добавлена</strong>
+              <div><p>Бумажный декор</p><span>Объёмные фигуры — листья, цветы и облака — для оформления и витрин.</span></div>
+              <strong>от 480&nbsp;₽</strong>
             </div>
           </article>
 
-          <article class="product-card reveal">
-            <div class="product-visual visual-five" role="img" aria-label="Placeholder изображения товара 5">
-              <span class="piece piece-1"></span><span class="piece piece-2"></span><span class="piece piece-3"></span><i></i>
-              <small>Изображение<br>будет добавлено</small>
-            </div>
+          <article class="product-card reveal" style="--card:#4787C3">
+            <div class="product-visual"><img src="assets/render/2.png" alt="" loading="lazy"></div>
             <div class="product-meta">
-              <div><p>Товар 5</p><span>Описание будет добавлено</span></div>
-              <strong>Цена будет добавлена</strong>
+              <div><p>Подарочный набор</p><span>Бумага, лента и декор в одной коробке — готовое решение для упаковки.</span></div>
+              <strong>от 990&nbsp;₽</strong>
             </div>
           </article>
 
-          <article class="product-card reveal">
-            <div class="product-visual visual-six" role="img" aria-label="Placeholder изображения товара 6">
-              <span class="piece piece-1"></span><span class="piece piece-2"></span><span class="piece piece-3"></span><i></i>
-              <small>Изображение<br>будет добавлено</small>
-            </div>
+          <article class="product-card reveal" style="--card:#CC3E8C">
+            <div class="product-visual"><img src="assets/render/clover.png" alt="" loading="lazy"></div>
             <div class="product-meta">
-              <div><p>Товар 6</p><span>Описание будет добавлено</span></div>
-              <strong>Цена будет добавлена</strong>
+              <div><p>Творческий набор</p><span>Материалы для бумажного творчества — соберите свою композицию.</span></div>
+              <strong>от 640&nbsp;₽</strong>
             </div>
           </article>
         </div>
       </section>
 
+      <!-- ===== Контакты ===== -->
       <section class="contacts section-pad" id="contacts" aria-labelledby="contacts-title">
-        <div class="section-index reveal">
-          <span>03</span>
-          <p>Контакты</p>
-        </div>
         <div class="contacts-copy reveal">
-          <h2 id="contacts-title">Обсудим<br><span>вашу идею?</span></h2>
-          <p>Напишите нам, если хотите узнать больше о товарах, материалах или условиях заказа.</p>
+          <div class="section-index"><span>03</span><p>Контакты</p></div>
+          <h2 id="contacts-title">Напишите<br><span>нам</span></h2>
+          <p>Расскажем о товарах, материалах и условиях заказа. Заходите в гости
+            или свяжитесь удобным способом.</p>
         </div>
         <address class="contact-list reveal">
-          <div><span>Телефон</span><p>Телефон будет добавлен</p></div>
-          <div><span>Email</span><p>Email будет добавлен</p></div>
-          <div><span>Адрес</span><p>Адрес будет добавлен</p></div>
-          <div><span>Социальные сети</span><p>Ссылки будут добавлены</p></div>
+          <div>
+            <span>Телефон</span>
+            <a href="tel:+70951234567">+7 (095) 123 45 67</a>
+          </div>
+          <div>
+            <span>Email</span>
+            <a href="mailto:bumagu@pozhaluysta.ru">bumagu@pozhaluysta.ru</a>
+          </div>
+          <div>
+            <span>Адрес</span>
+            <p>г. Москва, ул. Тверская, 12<br>Россия, 101000</p>
+          </div>
+          <div>
+            <span>Время работы</span>
+            <p>Пн–Вс: 10:00 – 23:00</p>
+          </div>
         </address>
       </section>
     </main>
 
     <footer class="site-footer">
-      <div class="footer-brand">
-        <span class="brand-mark brand-mark-light" aria-hidden="true"><i></i><i></i><i></i></span>
-        <p>Modular<br>Paper Showcase</p>
-      </div>
-      <p class="footer-note">Каталог объектов,<br>которые меняются вместе с вами.</p>
+      <img src="assets/logo.png" alt="Бумагу, пожалуйста" class="footer-logo">
       <nav aria-label="Навигация в подвале">
+        <a href="#catalog">Каталог</a>
         <a href="#about">О нас</a>
-        <a href="#catalog">Товары</a>
         <a href="#contacts">Контакты</a>
       </nav>
-      <p class="copyright">© <span data-year>2026</span> Modular Paper Showcase</p>
+      <p class="copyright">© <span data-year>2026</span> «Бумагу, пожалуйста». Студия упаковки подарков и бумажного творчества.</p>
     </footer>
   </body>
 </html>
