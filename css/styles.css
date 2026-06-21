@@ -189,10 +189,10 @@ h1, h2, h3 { margin: 0; line-height: 1.05; font-weight: 800; letter-spacing: -0.
 
 /* ===== Каталог ===== */
 .catalog-heading { max-width: 720px; margin: 0 auto clamp(44px, 6vw, 72px); text-align: center; }
-.catalog-heading .section-index { justify-content: center; }
+.catalog-heading .section-index { display: inline-flex; justify-content: center; }
 .catalog-heading h2 { font-size: clamp(36px, 6vw, 72px); }
 .catalog-heading h2 em { font-style: normal; color: var(--blue); }
-.catalog-heading p { color: var(--muted); margin: 18px auto 0; max-width: 56ch; }
+.catalog-heading > p { color: var(--muted); margin: 18px auto 0; max-width: 56ch; }
 
 .catalog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(18px, 2.4vw, 30px); }
 
