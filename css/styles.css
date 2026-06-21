@@ -215,7 +215,7 @@ h1, h2, h3 { margin: 0; line-height: 1.05; font-weight: 800; letter-spacing: -0.
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
   padding: 30px 26px 24px; min-height: 240px;
   display: flex; flex-direction: column; gap: 14px;
-  transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+  transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease, border-color .35s ease;
 }
 /* Акцентная полоса сверху */
 .product-card::before {
@@ -227,10 +227,20 @@ h1, h2, h3 { margin: 0; line-height: 1.05; font-weight: 800; letter-spacing: -0.
   background: radial-gradient(circle, color-mix(in srgb, var(--card) 60%, transparent) 0%, transparent 70%);
   opacity: .45; pointer-events: none; transition: opacity .28s ease, transform .28s ease;
 }
-/* По ТЗ: при наведении карточка немного увеличивается */
-.product-card:hover {
-  transform: scale(1.035); border-color: color-mix(in srgb, var(--card) 60%, transparent);
-  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.5);
+/* По правке заказчика: при наведении карточка заметно «всплывает» — увеличивается,
+   поднимается вверх и отбрасывает чёткую тень + цветную подсветку (как фигурки).
+   z-index поднимает её НАД соседями, иначе увеличенные края перекрываются и рост незаметен. */
+/* ВАЖНО: селектор `.catalog-grid .product-card:hover` (специфичность 0,3,0) обязателен,
+   чтобы перебить `.reveal.is-visible { transform: none }` (0,2,0, идёт ниже по файлу).
+   Без этого scale обнулялся и карточка НЕ увеличивалась. */
+.catalog-grid .product-card:hover {
+  transform: translateY(-16px) scale(1.1);
+  z-index: 5;
+  border-color: color-mix(in srgb, var(--card) 90%, transparent);
+  box-shadow:
+    0 44px 90px rgba(0, 0, 0, 0.7),
+    0 0 0 1px color-mix(in srgb, var(--card) 60%, transparent),
+    0 18px 54px color-mix(in srgb, var(--card) 42%, transparent);
 }
 .product-card:hover::after { opacity: .7; transform: scale(1.1); }
 
@@ -304,17 +314,42 @@ h1, h2, h3 { margin: 0; line-height: 1.05; font-weight: 800; letter-spacing: -0.
   .site-nav a { font-size: 22px; }
   body.menu-open { overflow: hidden; }
 
-  /* На мобильном — по 3 элемента симметрично с каждого края (верх+верх+низ),
-     середину прячем, чтобы не налезала на логотип */
-  .fig--l3, .fig--l4, .fig--l5, .fig--l6,
-  .fig--r3, .fig--r4, .fig--r5, .fig--r6 { display: none; }
-  .fig--l1, .fig--r1 { width: clamp(58px, 16vw, 100px); top: 0%; }
-  .fig--l2, .fig--r2 { width: clamp(56px, 15vw, 96px);  top: 12%; }
-  .fig--l7, .fig--r7 { width: clamp(64px, 17vw, 108px); }
+  /* Лепестки собраны в «кучки» (клумбы) по 3 внахлёст в каждом углу, а не разбросаны по одному.
+     Средние (l4/r4) прячем, чтобы не лезли на логотип. Итого 4 кучки × 3 = 12 лепестков. */
+  /* Все 14 лепестков задействованы — 4 плотные кучки по углам (по 4 и 3 внахлёст). */
+  .fig { width: clamp(54px, 15vw, 84px); }
+
+  /* Верхняя левая кучка (4 шт. внахлёст) */
+  .fig--l1 { top: 0%;  left: 0%;  right: auto; bottom: auto; }
+  .fig--l2 { top: 6%;  left: 12%; right: auto; bottom: auto; }
+  .fig--l3 { top: 12%; left: 2%;  right: auto; bottom: auto; }
+  .fig--l4 { top: 4%;  left: 22%; right: auto; bottom: auto; display: block; }
+  /* Верхняя правая кучка (зеркало) */
+  .fig--r1 { top: 0%;  right: 0%;  left: auto; bottom: auto; }
+  .fig--r2 { top: 6%;  right: 12%; left: auto; bottom: auto; }
+  .fig--r3 { top: 12%; right: 2%;  left: auto; bottom: auto; }
+  .fig--r4 { top: 4%;  right: 22%; left: auto; bottom: auto; display: block; }
+  /* Нижняя левая кучка (3 шт.) */
+  .fig--l5 { top: auto; bottom: 12%; left: 1%;  right: auto; }
+  .fig--l6 { top: auto; bottom: 4%;  left: 13%; right: auto; }
+  .fig--l7 { top: auto; bottom: 0%;  left: 3%;  right: auto; }
+  /* Нижняя правая кучка (зеркало) */
+  .fig--r5 { top: auto; bottom: 12%; right: 1%;  left: auto; }
+  .fig--r6 { top: auto; bottom: 4%;  right: 13%; left: auto; }
+  .fig--r7 { top: auto; bottom: 0%;  right: 3%;  left: auto; }
 }
 
 @media (max-width: 460px) {
-  .catalog-grid { grid-template-columns: 1fr; }
+  /* По правке заказчика: карточки «в куче», как на ПК — оставляем сетку 2-в-ряд,
+     а не растягиваем по одной. Компактные отступы/шрифты, чтобы помещалось больше. */
+  .catalog-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .product-card { padding: 18px 15px 15px; min-height: 190px; gap: 9px; }
+  .product-cat { font-size: 10.5px; letter-spacing: .08em; }
+  .product-title { font-size: 17px; }
+  .product-desc { font-size: 12.5px; line-height: 1.45; }
+  .product-foot { padding-top: 12px; }
+  .price { font-size: 16px; }
+  .product-arrow { font-size: 18px; }
   .contact-list > div { flex-direction: column; align-items: flex-start; gap: 6px; }
   .contact-list a, .contact-list p { text-align: left; }
 }
