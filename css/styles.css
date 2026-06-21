@@ -137,11 +137,25 @@ h1, h2, h3 { margin: 0; line-height: 1.05; font-weight: 800; letter-spacing: -0.
   position: absolute; height: auto;
   filter: drop-shadow(0 10px 26px rgba(0, 0, 0, 0.5));
   opacity: 1;
+  /* Реагируют на курсор (контейнер выключен через pointer-events:none — включаем обратно) */
+  pointer-events: auto; cursor: pointer;
+  transition: transform .35s cubic-bezier(.2,.7,.2,1), filter .35s ease;
   animation-name: figIn, breathe;
   animation-duration: .9s, 7s;
   animation-timing-function: cubic-bezier(.2,.7,.2,1), ease-in-out;
   animation-iteration-count: 1, infinite;
   animation-direction: normal, alternate;
+}
+/* По правке заказчика: при наведении фигурка всплывает вверх и подсвечивается.
+   animation:none снимает «дыхание», чтобы transform из :hover сработал. */
+.fig:hover {
+  animation: none;
+  transform: translateY(-22px) scale(1.07);
+  filter:
+    drop-shadow(0 22px 40px rgba(0, 0, 0, 0.55))
+    drop-shadow(0 0 24px rgba(255, 255, 255, 0.45))
+    brightness(1.1);
+  z-index: 4;
 }
 /* --- Кластеры зеркальны: l(N) и r(N) имеют одинаковые top/width, левый/правый отступ равны --- */
 .fig--l1 { top: 0%;   left: 1%;  width: clamp(90px, 12.2vw, 188px); animation-delay: .10s, .8s; }
@@ -197,35 +211,47 @@ h1, h2, h3 { margin: 0; line-height: 1.05; font-weight: 800; letter-spacing: -0.
 .catalog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(18px, 2.4vw, 30px); }
 
 .product-card {
+  position: relative; isolation: isolate; overflow: hidden;
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
-  overflow: hidden; display: flex; flex-direction: column;
+  padding: 30px 26px 24px; min-height: 240px;
+  display: flex; flex-direction: column; gap: 14px;
   transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+}
+/* Акцентная полоса сверху */
+.product-card::before {
+  content: ""; position: absolute; inset: 0 0 auto 0; height: 5px; background: var(--card);
+}
+/* Мягкое цветное «свечение» в углу вместо картинки */
+.product-card::after {
+  content: ""; position: absolute; z-index: -1; right: -50px; top: -40px; width: 180px; height: 180px;
+  background: radial-gradient(circle, color-mix(in srgb, var(--card) 60%, transparent) 0%, transparent 70%);
+  opacity: .45; pointer-events: none; transition: opacity .28s ease, transform .28s ease;
 }
 /* По ТЗ: при наведении карточка немного увеличивается */
 .product-card:hover {
   transform: scale(1.035); border-color: color-mix(in srgb, var(--card) 60%, transparent);
   box-shadow: 0 22px 50px rgba(0, 0, 0, 0.5);
 }
-.product-visual {
-  position: relative; aspect-ratio: 4 / 3; display: grid; place-items: center;
-  padding: 26px; background:
-    radial-gradient(120% 120% at 50% 0%, color-mix(in srgb, var(--card) 26%, #000) 0%, #0a0a0c 70%);
-}
-.product-visual::before {
-  content: ""; position: absolute; inset: auto 0 -1px 0; height: 6px; background: var(--card);
-}
-.product-visual img { max-height: 78%; width: auto; filter: drop-shadow(0 12px 26px rgba(0, 0, 0, 0.5)); }
+.product-card:hover::after { opacity: .7; transform: scale(1.1); }
 
-.product-meta { display: flex; flex-direction: column; gap: 16px; padding: 22px 22px 24px; flex: 1; }
-.product-meta > div { display: flex; flex-direction: column; gap: 8px; }
-.product-meta p { margin: 0; font-size: 21px; font-weight: 700; }
-.product-meta span { color: var(--muted); font-size: 14.5px; line-height: 1.45; }
-.product-meta strong { margin-top: auto; font-size: 20px; font-weight: 800; color: var(--card); }
+.product-cat {
+  align-self: flex-start; color: var(--card);
+  text-transform: uppercase; letter-spacing: .12em; font-size: 12.5px; font-weight: 700;
+}
+.product-title { font-size: clamp(21px, 2.4vw, 25px); font-weight: 800; }
+.product-desc { color: var(--muted); font-size: 14.5px; line-height: 1.5; flex: 1; margin: 0; }
+.product-foot {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 6px; padding-top: 16px; border-top: 1px solid var(--line);
+}
+.price { font-size: 20px; font-weight: 800; color: var(--card); }
+.product-arrow { color: var(--card); font-size: 22px; line-height: 1; transition: transform .2s ease; }
+.product-card:hover .product-arrow { transform: translateX(5px); }
 
 /* ===== Контакты ===== */
 .contacts { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(36px, 6vw, 90px); align-items: start; }
 .contacts-copy h2 { font-size: clamp(36px, 6vw, 70px); }
-.contacts-copy h2 span { color: var(--green); }
+.contacts-copy h2 span { color: var(--magenta); }
 .contacts-copy p { color: var(--muted); margin-top: 20px; max-width: 42ch; }
 .contact-list { font-style: normal; display: grid; gap: 4px; }
 .contact-list > div {
@@ -239,14 +265,17 @@ h1, h2, h3 { margin: 0; line-height: 1.05; font-weight: 800; letter-spacing: -0.
 /* ===== Подвал ===== */
 .site-footer {
   border-top: 1px solid var(--line); padding: clamp(40px, 6vw, 64px) var(--pad);
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 28px;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 28px;
   max-width: var(--maxw); margin: 0 auto;
 }
-.footer-logo { height: 40px; width: auto; }
-.site-footer nav { display: flex; gap: 26px; }
+/* Логотип — отдельной строкой сверху слева; ниже копирайт и ссылки на одном уровне.
+   flex-basis:100% отдаёт логотипу свою строку, object-fit сохраняет пропорции
+   (без него картинка растягивалась на всю ширину). */
+.footer-logo { height: 40px; flex-basis: 100%; object-fit: contain; object-position: left; }
+.site-footer nav { display: flex; gap: 26px; order: 2; }
 .site-footer nav a { font-weight: 600; font-size: 14px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
 .site-footer nav a:hover { color: var(--text); }
-.copyright { width: 100%; color: var(--muted); font-size: 13.5px; margin: 0; }
+.copyright { order: 1; flex: 1 1 0; min-width: 0; color: var(--muted); font-size: 13.5px; margin: 0; }
 
 /* ===== Reveal-анимации ===== */
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
